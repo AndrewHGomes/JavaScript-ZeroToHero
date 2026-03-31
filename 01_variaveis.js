@@ -232,4 +232,4 @@ const BRASIL = "Brasil";
 let corFundoTela = "dark";
 
 let var1 = "Pode";
-// let 1var = 'Não pode' // Deve iniciar com
+// let 1var = 'Não pode' // não podem começar com números
