@@ -296,7 +296,7 @@ console.log(inteligenciaArtificial.toUpperCase()); // "GEMINI"
 let fraseFinal = "Fim da aula";
 
 fraseFinal.autor = "Eu";
-console.log(fraseFinal.autor); // JS embrulha em um wrapper no caso de métodos que vem de níveis acima na Prototype Chain (Objeto String), mas não para propriedades criadas em strings como se fossem objetos literais.
+console.log(fraseFinal.autor); // O JS cria um objeto temporário para acessar métodos, mas ele não mantém esse objeto — por isso propriedades adicionadas não persistem.
 
 //==========================================================
 
