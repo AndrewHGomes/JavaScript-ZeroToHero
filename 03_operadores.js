@@ -529,7 +529,7 @@ console.log(saudacao);
 
 // Operador de Vírgula
 let umNumero = (10, 20, 30);
-console.log(x); // 30 (As outras foram executadas, mas só a última "ficou")
+console.log(umNumero); // 30 (As outras foram executadas, mas só a última "ficou")
 
 let n1 = 1,
   n2 = 2,

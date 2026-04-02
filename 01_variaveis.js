@@ -68,7 +68,7 @@ console.log(emailDoUsuario);
 //============================================================
 
 /*
-Aula 3: Tipagem Primitiva (A Natureza dos Dados)
+AULA 3: Tipagem Primitiva (A Natureza dos Dados)
 Até agora, tratamos as variáveis como "caixas", mas o que colocamos dentro delas tem texturas e formas diferentes. No JavaScript, embora não precisemos dizer o tipo da variável ao declará-la (ela é dinamicamente tipada), os valores possuem tipos.
 O Conceito: Tipos Primitivos
 Existem alguns tipos fundamentais que são a base de tudo:
@@ -220,7 +220,7 @@ let algumUsuario = "Henrique";
 {
   const senhaDesseUsuario = 54321;
 
-  // console.log(algumUsuario); // ReferenceError: Cannot access 'algumUsuario' before initialization
+  // console.log(algumUsuario); // ReferenceError: Cannot access 'algumUsuario' before initialization // TDZ (Temporal Dead Zone)
   console.log(senhaDesseUsuario);
 
   let algumUsuario = "Andrew"; // Erro acima ocorre depois da criação dessa variável dentro deste escopo, antes não (Shadowing (Sombreamento))
