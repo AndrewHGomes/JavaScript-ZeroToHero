@@ -28,7 +28,7 @@ console.log(valor, typeof valor);
 valor = "Um texto qualquer";
 console.log(valor, typeof valor);
 
-console.log(typeof typeof 10);
+console.log(typeof typeof 10); // "string" - typeof sempre retorna string
 
 //==========================================================
 
@@ -61,7 +61,7 @@ let frase = `Meu objetivo é ${objetivo} ${tecnologia}, pois não gostei de ${od
 console.log(frase);
 
 tecnologia[0] = "s";
-console.log(tecnologia);
+console.log(tecnologia); // Imutável - permanece "Svelte"
 
 console.log(`A frase tem ${frase.length} caracteres, incluindo espaços.`);
 
@@ -93,10 +93,10 @@ let num1 = 0.1;
 let num2 = 0.2;
 let soma = num1 + num2;
 
-console.log(soma);
-console.log(soma.toFixed(1));
+console.log(soma); // 0.30000000000000004 - imprecisão do ponto flutuante
+console.log(soma.toFixed(1)); // "0.3" - arredondando para exibição
 
-console.log(Math.sqrt(negativo));
+console.log(Math.sqrt(negativo)); // NaN - raiz quadrada de negativo
 
 //==========================================================
 
@@ -122,13 +122,13 @@ console.log(Boolean(42)); // true (Truthy)
 let usuarioAtivo = true;
 let saldo = 0;
 
-console.log(Boolean(usuarioAtivo));
-console.log(Boolean(saldo));
+console.log(Boolean(usuarioAtivo)); // true
+console.log(Boolean(saldo)); // false
 
-console.log(!!saldo === Boolean(saldo));
+console.log(!!saldo === Boolean(saldo)); // true - coerção dupla para boolean
 
 let stringEspaco = " ";
-console.log(typeof stringEspaco, Boolean(stringEspaco), !!stringEspaco);
+console.log(typeof stringEspaco, Boolean(stringEspaco), !!stringEspaco); // "string" true true
 
 //==========================================================
 
@@ -146,7 +146,7 @@ let indefinida;
 console.log(indefinida, typeof indefinida); // undefined - undefined
 
 let nula = null;
-console.log(nula, typeof nula); // null - object (O famoso erro histórico)
+console.log(nula, typeof nula); // null - object (erro histórico)
 
 // EXERCÍCIO 5: Primitivos IV - Null e Undefined (As Ausências)
 let contato;
@@ -155,11 +155,11 @@ let endereco = null;
 console.log(contato, typeof contato);
 console.log(endereco, typeof endereco);
 
-console.log(contato == endereco);
-console.log(contato === endereco);
+console.log(contato == endereco); // true - coerção de valores ausentes
+console.log(contato === endereco); // false - tipos diferentes
 
-console.log(10 + null);
-console.log(10 + undefined);
+console.log(10 + null); // 10 - null convertido para 0
+console.log(10 + undefined); // NaN - undefined não pode ser convertido para número
 
 //==========================================================
 
@@ -185,8 +185,8 @@ console.log(limiteSeguro);
 let grandeNumero = BigInt(limiteSeguro) + 2n;
 console.log(grandeNumero, typeof grandeNumero);
 
-console.log(10n == 10);
-console.log(10n === 10);
+console.log(10n == 10); // true - coerção implícita
+console.log(10n === 10); // false - tipos diferentes
 
 //==========================================================
 
@@ -207,8 +207,8 @@ console.log(id1 === id2); // false - Cada Symbol é único!
 
 const usuario = {
   nome: "Fulano de Tal",
-  [id1]: 123, // Chave única usando Symbol
-  [id2]: 456, // Chave única usando Symbol
+  [id1]: 123,
+  [id2]: 456,
 };
 
 console.log(usuario);
@@ -220,17 +220,17 @@ console.log(usuario[id2]); // 456
 const simboloA = Symbol("key");
 const simboloB = Symbol("key");
 
-console.log(simboloA == simboloB);
-console.log(simboloA === simboloB);
+console.log(simboloA == simboloB); // false
+console.log(simboloA === simboloB); // false
 
 const cofre = {
   [simboloA]: "Segredo 1",
 };
 
-console.log(cofre["key"]);
-console.log(cofre[simboloA]);
+console.log(cofre["key"]); // undefined - string não é Symbol
+console.log(cofre[simboloA]); // "Segredo 1"
 
-console.log(simboloB, typeof simboloB);
+console.log(simboloB, typeof simboloB); // "symbol"
 
 //==========================================================
 
@@ -244,12 +244,12 @@ Objetos são manipulados por referência. Ao copiar um objeto, você copia sua r
 */
 
 let pessoa = { nome: "Henrique" };
-let outraPessoa = pessoa; // Copiou a referência (o endereço)
+let outraPessoa = pessoa;
 
 outraPessoa.nome = "Andrew";
 
-console.log(pessoa.nome); // "Andrew" - O original foi afetado!
-console.log(pessoa === outraPessoa); // true - Apontam para o mesmo lugar
+console.log(pessoa.nome); // "Andrew"
+console.log(pessoa === outraPessoa); // true
 
 // EXERCÍCIO 8: Tipos de Referência - O Gigante Object
 let carro = {
@@ -272,8 +272,8 @@ const objB = {
   id: 1,
 };
 
-console.log(objA == objB);
-console.log(objA === objB); // São diferentes pois cada um aponta para uma referência diferente
+console.log(objA == objB); // false
+console.log(objA === objB); // false
 
 //==========================================================
 
@@ -289,14 +289,11 @@ Ao acessar um método, o JS cria temporariamente um objeto wrapper (ex: String),
 let inteligenciaArtificial = "gemini";
 console.log(inteligenciaArtificial.toUpperCase()); // "GEMINI"
 
-// O que acontece internamente por um breve instante:
-// (new String("gemini")).toUpperCase() -> retorna "GEMINI" e some da memória.
-
 // EXERCÍCIO 9: O Elo Perdido - Wrapper Objects (Auto-boxing)
 let fraseFinal = "Fim da aula";
 
 fraseFinal.autor = "Eu";
-console.log(fraseFinal.autor); // O JS cria um objeto temporário para acessar métodos, mas ele não mantém esse objeto — por isso propriedades adicionadas não persistem.
+console.log(fraseFinal.autor); // undefined - propriedades não persistem
 
 //==========================================================
 
@@ -311,13 +308,13 @@ NaN não é igual a si mesmo com ===.
 Object.is() trata esses casos corretamente e não realiza coerção de tipo.
 */
 
-console.log(NaN == NaN); // false (Surpresa!)
-console.log(NaN === NaN); // false (Surpresa!)
+console.log(NaN == NaN); // false
+console.log(NaN === NaN); // false
 
-console.log(Object.is(NaN, NaN)); // true (Preciso)
+console.log(Object.is(NaN, NaN)); // true
 
 console.log(0 === -1 * 0); // true
-console.log(Object.is(0, -0)); // false (Diferencia o sinal na memória)
+console.log(Object.is(0, -0)); // false
 
 //==========================================================
 
@@ -331,16 +328,15 @@ Arrays são objetos especializados, portanto typeof [] retorna "object".
 Funções também são objetos, mas typeof retorna "function" por convenção da linguagem.
 */
 
-// Exercício Final
 let checarNaN = 0 / 0;
-console.log(checarNaN === checarNaN);
-console.log(Object.is(checarNaN, checarNaN));
+console.log(checarNaN === checarNaN); // false
+console.log(Object.is(checarNaN, checarNaN)); // true
 
 function minhaFuncao() {}
 let arrayTest = [];
 
-console.log(minhaFuncao, typeof minhaFuncao);
-console.log(arrayTest, typeof arrayTest);
+console.log(minhaFuncao, typeof minhaFuncao); // "function"
+console.log(arrayTest, typeof arrayTest); // "object"
 
 let str = new String("ABC");
-console.log(str, typeof str); // 'str' é um objeto wrapper (String), não um primitivo
+console.log(str, typeof str); // 'object' - wrapper String

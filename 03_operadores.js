@@ -183,7 +183,7 @@ Os operadores relacionais comparam a ordem de grandeza entre valores:
 Maior que (>): true se o da esquerda for maior.
 Menor que (<): true se o da esquerda for menor.
 Maior ou Igual (>=): true se o da esquerda for maior ou exatamente igual.
-Menor ou Igual (<=): true se o da esquerda for menor ou exatamente igual.
+Menor ou Igual (<=): true se o da esquerda for menor or exatamente igual.
 
 Debaixo do Capô
 Assim como no ==, esses operadores também realizam coerção automática. Se você comparar 10 > "5", o JS converterá a string para número.
@@ -277,7 +277,7 @@ Diferente de um bloco if/else (que é uma instrução), o operador ternário é 
 let algumaIdade = 15;
 let verificaIdade = algumaIdade >= 18 ? "Maior de idade" : "Menor de idade";
 
-console.log(algumaIdade, verificaIdade); // 20 Maior de idade
+console.log(algumaIdade, verificaIdade); // 15 Menor de idade
 
 // Também pode ser usado dentro de strings
 console.log(`O usuário está ${algumaIdade >= 18 ? "liberado" : "bloqueado"}`);
@@ -360,17 +360,17 @@ let objUsuario = {
   nome: "Gomes",
 };
 
-console.log(objUsuario.token); // "abc123secret"
+console.log(objUsuario.token); // "abc123secreto"
 
 delete objUsuario.token; // Remove a propriedade sensível
 
 console.log(objUsuario.token); // undefined (a propriedade não existe mais)
-console.log(objUsuario); // { id: 1, nome: "Carlos" }
+console.log(objUsuario); // { id: 1, nome: "Gomes" }
 
 // EXERCÍCIO 9: Operadores de Tipo e Deletar (typeof e delete)
 let entrada = null;
 let tipoEntrada = typeof entrada;
-console.log(tipoEntrada);
+console.log(tipoEntrada); // "object"
 
 let sessao = {
   usuario: "Eu mesmo",
@@ -380,7 +380,7 @@ let sessao = {
 
 delete sessao.senha;
 
-console.log(typeof tipoEntrada === typeof "string");
+console.log(typeof tipoEntrada === typeof "string"); // true
 
 console.log(sessao);
 
@@ -402,11 +402,11 @@ Exemplo rápido: O número 5 em binário é 0101. O número 3 é 0011.
 5 & 3 resulta em 0001 (que é 1 em decimal).
 */
 
-let x = 5; // binário: 00000000000000000000000000000101
-let y = 3; // binário: 00000000000000000000000000000011
+let x = 5; // binário: 0101
+let y = 3; // binário: 0011
 
-console.log(x & y); // 1 (Apenas o último bit é 1 em ambos)
-console.log(x | y); // 7 (binário 0111)
+console.log(x & y); // 1
+console.log(x | y); // 7
 
 // Uso comum: Flags de permissão
 const READ = 1; // 0001
@@ -428,10 +428,10 @@ let configuracaoAtual = 0;
 
 configuracaoAtual = SOM | REPLAY;
 
-let musicaEstaAtiva = MUSICA & configuracaoAtual;
+let musicaEstaAtiva = (configuracaoAtual & MUSICA) !== 0;
 
-console.log(configuracaoAtual);
-console.log(musicaEstaAtiva);
+console.log(configuracaoAtual); // 5
+console.log(musicaEstaAtiva); // false
 
 //===================================================================
 
@@ -448,27 +448,23 @@ Debaixo do Capô
 Quando você faz 5 << 1, o binário 0101 (5) torna-se 1010 (10). Para o processador, mover bits é uma das operações mais baratas e rápidas que existem, muito mais que uma multiplicação aritmética comum. É por isso que em motores de jogos ou processamento de imagem, você verá muito disso.
 */
 
-let numero = 2; // Binário: 0010
+let numero_base = 2; // Binário: 0010
 
 // Deslocando 2 posições para a esquerda
-let esquerda = numero << 2;
+let esquerda = numero_base << 2;
 // 0010 vira 1000 (Valor 8)
-// Cálculo: 2 * (2 ** 2) = 8
-
 console.log(esquerda);
 
-let direita = numero >> 1;
-// 10100 vira 01010 (Valor 10)
-// Cálculo: 20 / 2 = 10
-
+let direita = numero_base >> 1;
+// 0010 vira 0001 (Valor 1)
 console.log(direita);
 
 // EXERCÍCIO 11: Operadores de Deslocamento (Bitwise Shift)
 let baseDeDados = 64;
-let resultadoDivisao = baseDeDados >> 2;
+let resultadoDivisao = baseDeDados >> 2; // 16
 
 let multiplicador = 5;
-let resultadoMultiplicacao = multiplicador << 4;
+let resultadoMultiplicacao = multiplicador << 4; // 80
 
 console.log(resultadoDivisao, resultadoMultiplicacao);
 
@@ -489,12 +485,10 @@ Debaixo do Capô
 O motor do JavaScript utiliza uma tabela interna de prioridades (de 1 a 20). Operadores com números maiores são executados primeiro. Quando os operadores têm a mesma prioridade (como + e -), ele avalia da esquerda para a direita (associatividade).
 */
 
-let calculoErrado = 10 + 5 * 2; // 20 (Multiplicação primeiro: 5*2 = 10, depois 10+10)
+let calculoErrado = 10 + 5 * 2; // 20 (5*2=10, 10+10=20)
 let calculoCerto = (10 + 5) * 2; // 30 (Parênteses primeiro!)
 
-let logica = true || (false && false);
-// true! Porque o && é processado antes.
-// Fica: true || (false && false) -> true || false -> true
+let logica = true || (false && false); // true! Porque o && é processado antes.
 
 // EXERCÍCIO 12: Precedência de Operadores (A Ordem do Caos)
 let nota1 = 8;
@@ -529,21 +523,21 @@ console.log(saudacao);
 
 // Operador de Vírgula
 let umNumero = (10, 20, 30);
-console.log(umNumero); // 30 (As outras foram executadas, mas só a última "ficou")
+console.log(umNumero); // 30
 
 let n1 = 1,
   n2 = 2,
-  n3 = 3; // Uso comum da vírgula para declarar múltiplas variáveis
+  n3 = 3; // Uso comum da vírgula
 
 // EXERCÍCIO 13: Operadores de Agrupamento e Vírgula
 let pontuacao;
 let resultadoFinal = ((pontuacao = 100), (pontuacao += 50), pontuacao * 2);
 
-let expressao = ("texto" + 5) * 2;
+let expressao = ("texto" + 5) * 2; // NaN
 console.log(expressao);
 
-expressao = "texto" + 5 * 2;
-console.log(expressao);
+let expressao2 = "texto" + 5 * 2; // "texto10"
+console.log(expressao2);
 
 //===================================================================
 

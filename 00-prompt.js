@@ -1,7 +1,7 @@
 /*
-Vamos explorar e destrinchar "ASSUNTO" em JavaScript.
+Vamos explorar e destrinchar ASSUNTO em JavaScript.
 
-Sua missão é esgotar esse assunto progressivamente com foco disciplinado por domínio, me levando do absoluto zero até o nível avançado (zero to hero), respeitando a ordem natural de aprendizado e priorizando padrões ES6+.
+Sua missão é esgotar esse assunto progressivamente com foco disciplinado por domínio, me levando do absoluto zero até o nível avançado (zero to hero), respeitando a ordem natural de aprendizado.
 
 Regras gerais:
 Não aprofundar outros assuntos (pode apenas citar superficialmente para contexto).
@@ -9,8 +9,8 @@ Manter foco total no CORE do JavaScript (sem DOM, backend ou APIs externas).
 Evitar explicações longas ou redundantes. Seja direto, técnico e progressivo.
 
 Estrutura obrigatória de cada aula:
-Explicação sucinta do conceito.
-Explicação técnica (o que acontece "debaixo do capô").
+Explicação sucinta e direta do conceito.
+"Debaixo do capô" (Explicação técnica direta).
 Exemplo simples, profissional e comentado em código.
 Exercício prático com requisitos claros (sem solução e sem dicas).
 

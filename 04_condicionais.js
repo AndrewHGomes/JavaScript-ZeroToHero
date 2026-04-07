@@ -110,7 +110,7 @@ O operador || (OU) exige que pelo menos uma das condições seja verdadeira.
 Por baixo do capô
 No operador &&, se a primeira condição for false, o JavaScript não precisa avaliar a segunda.
 No operador ||, se a primeira condição for true, a segunda também não precisa ser avaliada.
-Esse comportamento evita trabalho desnecessário.
+Esse comportamento evita trabalho desnecessário (Curto-Circuito).
 */
 
 const temIngresso = true;
@@ -138,6 +138,8 @@ if (temHistoricoNegativo) {
   console.log("Empréstimo NEGADO!");
 } else if (rendaMensal > 2000 && scoreCredito > 700) {
   console.log("Empréstimo APROVADO!");
+} else {
+  console.log("Análise pendente.");
 }
 
 //=============================================================
@@ -148,7 +150,7 @@ O Conceito
 O operador ! inverte um valor booleano: true vira false e false vira true.
 
 Além disso, o JavaScript trata alguns valores como falsos (falsy), mesmo não sendo exatamente false:
-0, "", null, undefined e NaN.
+0, 0n (BigInt), "", null, undefined e NaN.
 Qualquer outro valor é considerado verdadeiro (truthy).
 
 Por baixo do capô
@@ -193,7 +195,7 @@ Ele possui três partes: condição, valor se verdadeiro e valor se falso.
 
 Por baixo do capô
 Diferente do if, o ternário retorna um valor.
-Por isso, ele pode ser usado diretamente em atribuições de variáveis.
+Por isso, ele pode ser usado diretamente em atribuições de variáveis ou dentro de strings.
 */
 
 const velocidade = 110;
@@ -289,16 +291,18 @@ if (!temUsuario) {
 }
 
 // EXERCÍCIO 8: O Poder da Refatoração (Guard Clauses)
-const existeSintomas = false;
-const corpoTemperatura = 36.5;
-const pacienteIdade = 60;
+const existeSintomas = true;
+const corpoTemperatura = 37.5;
+const pacienteIdade = 65;
 
+// Se o código passa por uma condição, a negativa dela já está implícita na próxima.
 if (!existeSintomas) {
   console.log("Liberado: Sem sinais de infecção.");
 } else if (corpoTemperatura >= 38) {
   console.log("Encaminhar para o setor de FEBRE");
-} else if (corpoTemperatura < 38 && pacienteIdade >= 60) {
+} else if (pacienteIdade >= 60) {
+  // Se chegou aqui, o JS já sabe que existeSintomas é true e corpoTemperatura é < 38
   console.log("Encaminhar para triagem de GRUPO DE RISCO");
-} else if (corpoTemperatura < 38 && pacienteIdade < 60) {
+} else {
   console.log("Encaminhar para triagem Geral");
 }

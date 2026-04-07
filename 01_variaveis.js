@@ -42,7 +42,7 @@ let: Permite que você altere o valor da "caixa" quantas vezes quiser (como voc�
 const (de constant): Cria uma variável cujo valor não pode ser alterado após a primeira atribuição. É uma caixa lacrada.
 var: A forma antiga (pré-2015). Ela tem comportamentos estranhos de escopo que causam bugs imprevisíveis. Regra de ouro: Evite-a em projetos modernos.
 
-2. Debaixo do Capô: Proteção de Memória
+Debaixo do Capô: Proteção de Memória
 Quando você usa const, o motor do JavaScript (V8) marca aquele endereço de memória como somente leitura. Se você tentar forçar uma nova escrita ali, o motor interrompe a execução e lança um erro de tipo (TypeError), protegendo a integridade dos dados que você decidiu que deveriam ser fixos.
 */
 
@@ -72,7 +72,7 @@ AULA 3: Tipagem Primitiva (A Natureza dos Dados)
 Até agora, tratamos as variáveis como "caixas", mas o que colocamos dentro delas tem texturas e formas diferentes. No JavaScript, embora não precisemos dizer o tipo da variável ao declará-la (ela é dinamicamente tipada), os valores possuem tipos.
 O Conceito: Tipos Primitivos
 Existem alguns tipos fundamentais que são a base de tudo:
-String: Textos (sempre entre aspas: ' ', " " ou ``  ).
+String: Textos (sempre entre aspas: ' ', " " ou ``  ).
 Number: Números (inteiros como 10 ou decimais/pontos flutuantes como 10.5).
 Boolean: Valores lógicos. Só existem dois: true (verdadeiro) ou false (falso).
 Undefined: Quando uma variável foi declarada, mas ainda não recebeu um valor (a caixa está vazia).
@@ -81,7 +81,7 @@ Null: Uma atribuição intencional para dizer que a variável está vazia (ausê
 Debaixo do Capô: Tipagem Dinâmica
 O JavaScript é uma linguagem de tipagem dinâmica e fraca.
 Dinâmica: A mesma "caixa" (let) pode guardar uma String agora e um Number depois. O motor JS descobre o tipo em tempo de execução.
-Fraca: Ele tenta ser "legal" demais e faz conversões automáticas (coerção), o que às vezes gera confusão (ex: somar um texto com um número).
+Fraca: Ele tenta ser "legal" demais e faz conversões automáticas (coerção), o que às vezes gera confusão (ex: somar um texto com um número). Curiosidade: o typeof do null retorna "object" por um erro histórico da linguagem.
 */
 
 let inteligenciaArtificial = "Gemini";
@@ -165,7 +165,7 @@ Se ele percorre todo o seu código e não encontra a etiqueta, o motor entra em 
 */
 
 let computador;
-console.log(computador); // udefined (caixa vazia)
+console.log(computador); // undefined
 
 let usuarioLogado = "Andrew";
 console.log(usuarioLogado); // Andrew
@@ -199,8 +199,7 @@ Escopo de Bloco: É uma sala trancada dentro de um andar. O que acontece lá den
 
 Debaixo do Capô: A Pilha de Escopo (Scope Chain)
 Quando você pede ao JavaScript para usar uma variável, ele olha primeiro para a "sala" (bloco) onde ele está. Se não encontrar, ele sai para o corredor, depois para o andar, até chegar na "calçada" (Global).
-Importante: Ele nunca olha para dentro de outras salas, apenas para fora.
-let e const respeitam as chaves {}. Se você as criar dentro de um bloco, elas morrem quando o bloco termina.
+Importante: O motor do JS faz o içamento das declarações para o topo do bloco, mas let e const permanecem na Zona Morta Temporal (TDZ) até serem inicializadas, impedindo o acesso ao escopo externo se o identificador já existir localmente.
 */
 
 let global = "Eu sou global";
@@ -223,7 +222,7 @@ let algumUsuario = "Henrique";
   // console.log(algumUsuario); // ReferenceError: Cannot access 'algumUsuario' before initialization // TDZ (Temporal Dead Zone)
   console.log(senhaDesseUsuario);
 
-  let algumUsuario = "Andrew"; // Erro acima ocorre depois da criação dessa variável dentro deste escopo, antes não (Shadowing (Sombreamento))
+  let algumUsuario = "Andrew"; // O JS "reserva" o nome no bloco interno, impedindo o acesso ao 'Henrique' global antes desta linha.
 
   console.log(algumUsuario); // Andrew
 }
@@ -292,13 +291,13 @@ let item = "Notebook";
 let valorDoItem = 3500;
 let desconto = 15;
 
-console.log(
-  `O item ${item} custa R$${valorDoItem}, mas com ${desconto}% de desconto, ele sai mais barato!`,
-);
+console.log(`
+  O item ${item} custa R$${valorDoItem}, mas com ${desconto}% de desconto, ele sai mais barato!,
+`);
 
-console.log(
-  `O ${item} vai sair por R$${valorDoItem - (valorDoItem * desconto) / 100}`,
-);
+console.log(`
+  O ${item} vai sair por R$${valorDoItem - (valorDoItem * desconto) / 100},
+`);
 
 //============================================================
 
@@ -341,7 +340,7 @@ AULA 10: Atribuição por Valor vs. Referência (O Labirinto)
 Esta é a aula que separa os iniciantes dos avançados. Até agora, lidamos com Primitivos (String, Number, Boolean). Agora vamos entender como o JS guarda isso na memória comparado a estruturas mais complexas.
 O Conceito: Cópia vs. Apontamento
 Tipos Primitivos (Valor): Quando você passa um valor primitivo para outra variável, o JS faz uma cópia real. São duas caixas independentes com o mesmo conteúdo.
-Tipos de Objeto/Arrays (Referência): (Menciono apenas para contexto). Eles funcionam como um "atalho". Se você copiar a variável, ambas apontam para a mesma caixa. Se mudar em uma, muda na outra.
+Tipos de Objeto/Arrays (Referência): Eles funcionam como um "atalho". Se você copiar a variável, ambas apontam para a mesma caixa. Se mudar em uma, muda na outra.
 
 Debaixo do Capô: Stack vs. Heap
 Os Primitivos vivem na Stack (Pilha), uma memória rápida onde o valor fica colado ao nome da variável.
@@ -399,7 +398,7 @@ servidor.status = "offline"; // Pode mudar a propriedade do objeto, o que não p
 console.log(servidor);
 
 // servidor = { // TypeError: Assignment to constant variable.
-//   ip: "0.0.0.0",
+//   ip: "0.0.0.0",
 // };
 
 //============================================================
@@ -412,7 +411,7 @@ let e const respeitam qualquer par de chaves { }. Se você criar um let dentro d
 var ignora blocos comuns. Ele só respeita o escopo de uma função ou o escopo global. Se você criar um var dentro de um if, ele "vaza" para fora e continua vivo.
 
 Debaixo do Capô: Global Object Pollution
-Quando você usa var no nível mais alto do seu código (fora de funções), o JavaScript o pendura no objeto global (no navegador, é o objeto window). Isso é perigoso porque você pode sobrescrever funcionalidades nativas do navegador sem querer.
+Quando você usa var no nível mais alto do seu código (em scripts tradicionais), o JavaScript o pendura no objeto global (window no navegador). Isso é perigoso porque você pode sobrescrever funcionalidades nativas sem querer.
 */
 
 if (true) {
