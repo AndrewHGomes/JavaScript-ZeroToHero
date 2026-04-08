@@ -103,7 +103,6 @@ if (idadeCliente < 12) {
 AULA 4: Operadores Lógicos (&& e ||)
 O Conceito
 Algumas decisões dependem de mais de uma condição.
-
 O operador && (E) exige que todas as condições sejam verdadeiras.
 O operador || (OU) exige que pelo menos uma das condições seja verdadeira.
 
@@ -148,7 +147,6 @@ if (temHistoricoNegativo) {
 AULA 5: O Operador de Negação (!) e Valores Falsy/Truthy
 O Conceito
 O operador ! inverte um valor booleano: true vira false e false vira true.
-
 Além disso, o JavaScript trata alguns valores como falsos (falsy), mesmo não sendo exatamente false:
 0, 0n (BigInt), "", null, undefined e NaN.
 Qualquer outro valor é considerado verdadeiro (truthy).
